@@ -21,7 +21,7 @@ export const AUDIENCES: Audience[] = [
     image: asset("/images/slide-online.jpg"),
     starts: [
       ["social-media", "Google Business Profile"],
-      ["design", "Flyer & Poster"],
+      ["design", "Flyer / Posters"],
       ["ai-tools", "AI Promo & Ad Videos"],
       ["social-media", "WhatsApp Marketing"],
     ],
@@ -31,10 +31,10 @@ export const AUDIENCES: Audience[] = [
     short: "Register the right way and launch with a brand people remember.",
     image: asset("/images/slide-registration.jpg"),
     starts: [
-      ["registration", "Company Registration (Pvt Ltd)"],
+      ["registration", "Private Limited Registration"],
       ["branding", "Logo Design"],
-      ["website", "Business Website"],
-      ["branding", "Full Brand Kit"],
+      ["website", "WordPress Website Development"],
+      ["branding", "Brand Guidelines"],
     ],
   },
   {
@@ -45,7 +45,7 @@ export const AUDIENCES: Audience[] = [
       ["website", "Portfolio & Personal Website"],
       ["branding", "Digital Visiting Card"],
       ["registration", "Legal Documentation Support"],
-      ["social-media", "Instagram & Facebook Handling"],
+      ["social-media", "Social Media Management"],
     ],
   },
   {
@@ -53,10 +53,10 @@ export const AUDIENCES: Audience[] = [
     short: "Reels, songs, thumbnails and a channel that grows.",
     image: asset("/images/cat-social.jpg"),
     starts: [
-      ["social-media", "Reels Planning"],
+      ["social-media", "Reel Content Planning"],
       ["ai-tools", "AI Brand Song & Jingle"],
       ["social-media", "YouTube Channel Setup"],
-      ["design", "YouTube Thumbnail"],
+      ["design", "YouTube Thumbnail Design"],
     ],
   },
   {
