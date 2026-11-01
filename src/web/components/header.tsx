@@ -99,13 +99,13 @@ export function Header() {
           scrolled ? "border-line shadow-[0_6px_24px_-12px_rgba(11,31,75,0.25)]" : "border-transparent"
         }`}
       >
-        <div className="container-x flex h-[72px] items-center gap-4">
+        <div className="container-x flex h-[88px] items-center gap-4">
           <Logo />
 
-          <nav className="ml-auto hidden items-center gap-0.5 min-[1200px]:flex xl:gap-1">
+          <nav className="ml-auto hidden items-center gap-0.5 min-[1280px]:flex">
             <Link
               to="/"
-              className={`rounded-lg px-2.5 py-2 text-[14px] font-medium xl:px-3 xl:text-[15px] ${loc === "/" ? "text-royal" : "text-navy hover:text-royal"}`}
+              className={`rounded-lg px-2 py-2 text-[14px] font-medium ${loc === "/" ? "text-royal" : "text-navy hover:text-royal"}`}
             >
               Home
             </Link>
@@ -113,7 +113,7 @@ export function Header() {
               <div key={c.slug} className="group relative">
                 <Link
                   to={`/services/${c.slug}`}
-                  className={`flex items-center gap-1 whitespace-nowrap rounded-lg px-2.5 py-2 text-[14px] font-medium transition xl:px-3 xl:text-[15px] ${
+                  className={`flex items-center gap-1 whitespace-nowrap rounded-lg px-2 py-2 text-[14px] font-medium transition ${
                     loc === `/services/${c.slug}` ? "text-brand" : "text-navy group-hover:text-brand"
                   }`}
                 >
@@ -145,7 +145,7 @@ export function Header() {
             ))}
             {extra.length > 0 && (
               <div className="group relative">
-                <button type="button" className={`flex items-center gap-1 whitespace-nowrap rounded-lg px-2.5 py-2 text-[14px] font-medium transition xl:px-3 xl:text-[15px] ${extra.some((x) => loc.startsWith(x.to)) ? "text-brand" : "text-navy group-hover:text-brand"}`}>
+                <button type="button" className={`flex items-center gap-1 whitespace-nowrap rounded-lg px-2 py-2 text-[14px] font-medium transition ${extra.some((x) => loc.startsWith(x.to)) ? "text-brand" : "text-navy group-hover:text-brand"}`}>
                   More
                   <ChevronDown className="h-4 w-4 transition group-hover:rotate-180" />
                 </button>
@@ -163,7 +163,7 @@ export function Header() {
             )}
           </nav>
 
-          <div className="ml-auto flex items-center gap-2 min-[1200px]:hidden">
+          <div className="ml-auto flex items-center gap-2 min-[1280px]:hidden">
             <button
               onClick={() => setOpen(true)}
               className="grid h-11 w-11 place-items-center rounded-xl border border-line text-navy"
@@ -176,7 +176,7 @@ export function Header() {
       </header>
 
       {/* Mobile drawer */}
-      <div className={`fixed inset-0 z-[60] min-[1200px]:hidden ${open ? "" : "pointer-events-none"}`}>
+      <div className={`fixed inset-0 z-[60] min-[1280px]:hidden ${open ? "" : "pointer-events-none"}`}>
         <button
           type="button"
           aria-label="Close menu overlay"
@@ -189,7 +189,7 @@ export function Header() {
             open ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <div className="flex h-[72px] items-center justify-between border-b border-line px-5">
+          <div className="flex h-[88px] items-center justify-between border-b border-line px-5">
             <Logo />
             <button onClick={() => setOpen(false)} aria-label="Close menu" className="p-2 text-navy">
               <X className="h-6 w-6" />

@@ -141,7 +141,7 @@ export const DEFAULT_SITE: SiteSettings = {
   siteName: "RKS Digital Services",
   tagline: "Your Needs. Our Solutions.",
   logo: BRAND_LOGO,
-  logoHeight: 60,
+  logoHeight: 76,
   // Taken from the RKS logo: deep navy letters, gold "K" accent.
   colors: { navy: "#0D234F", royal: "#1E46B4", brand: "#B5801A" },
   phone: "+91 93981 28825",
