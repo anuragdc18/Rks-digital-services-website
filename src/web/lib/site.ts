@@ -274,7 +274,7 @@ export const CATEGORIES: Category[] = [
     short: "Fundamentals training for Azure, AI, Copilot, Microsoft 365, Power Platform and Security.",
     intro:
       "Learn practical Microsoft skills from a certified trainer — from Word, Excel and PowerPoint for daily work to Microsoft Fundamentals certifications with practice tests and exam booking help.",
-    image: asset("/images/cat-microsoft-v2.jpg"),
+    image: asset("/images/cat-microsoft-v3.webp"),
     menuItems: [
       "Digital Skills & AI Tools Training",
       "AB-900: Copilot & Agent Administration Fundamentals",

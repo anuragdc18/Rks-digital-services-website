@@ -35,33 +35,40 @@ export function Footer() {
               <p className="flex items-center gap-2"><MapPin className="h-4 w-4 text-brand" /> {site.city}</p>
             )}
           </div>
-          <div className="mt-5 flex gap-2">
-            {(
-              [
-                ["facebook", Facebook],
-                ["instagram", Instagram],
-                ["linkedin", Linkedin],
-                ["youtube", Youtube],
-              ] as const
-            )
-              .filter(([k]) => site.socials[k])
-              .map(([k, Icon]) => (
-                <a key={k} href={site.socials[k]} target="_blank" rel="noreferrer" aria-label={k} className="grid h-9 w-9 place-items-center rounded-lg bg-white/10 hover:bg-brand hover:text-white">
-                  <Icon className="h-4 w-4" />
-                </a>
-              ))}
+          {/* Social profiles: RKS Digital Services first, then RKS Creations — both labelled so visitors can tell them apart */}
+          <div className="mt-5">
+            <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-white/50">{site.siteName}</p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {(
+                [
+                  ["facebook", Facebook, "Facebook"],
+                  ["instagram", Instagram, "Instagram"],
+                  ["linkedin", Linkedin, "LinkedIn"],
+                  ["youtube", Youtube, "YouTube"],
+                ] as const
+              )
+                .filter(([k]) => site.socials[k])
+                .map(([k, Icon, name]) => (
+                  <a key={k} href={site.socials[k]} target="_blank" rel="noreferrer" aria-label={`${site.siteName} on ${name}`} className="inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-2.5 py-1.5 text-[13px] hover:bg-brand hover:text-white">
+                    <Icon className="h-4 w-4" /> {name}
+                  </a>
+                ))}
+            </div>
           </div>
           {moreSocials.length > 0 && (
-            <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px]">
-              <span className="text-white/50">Also find us:</span>
-              {moreSocials.map((m) => {
-                const Icon = SOCIAL_ICONS[m.network];
-                return (
-                  <a key={m.url} href={m.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 hover:text-white">
-                    <Icon className="h-3.5 w-3.5 text-brand" /> {m.label}
-                  </a>
-                );
-              })}
+            <div className="mt-4">
+              <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-white/50">RKS Creations</p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {moreSocials.map((m) => {
+                  const Icon = SOCIAL_ICONS[m.network];
+                  const name = { facebook: "Facebook", instagram: "Instagram", youtube: "YouTube", linkedin: "LinkedIn" }[m.network];
+                  return (
+                    <a key={m.url} href={m.url} target="_blank" rel="noreferrer" aria-label={`RKS Creations on ${name}`} className="inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-2.5 py-1.5 text-[13px] hover:bg-brand hover:text-white">
+                      <Icon className="h-4 w-4" /> {name}
+                    </a>
+                  );
+                })}
+              </div>
             </div>
           )}
         </div>
@@ -98,12 +105,6 @@ export function Footer() {
         <div className="container-x flex flex-col items-center justify-between gap-2 py-5 text-[13px] sm:flex-row">
           <p>© {new Date().getFullYear()} {site.siteName}. All rights reserved.</p>
           <p>Rajahmundry, Andhra Pradesh · Serving clients across India</p>
-          <p>
-            Designed by{" "}
-            <a href="https://digitalconnect.in" target="_blank" rel="noopener" className="font-semibold underline-offset-2 hover:underline">
-              digitalconnect.in
-            </a>
-          </p>
         </div>
       </div>
     </footer>

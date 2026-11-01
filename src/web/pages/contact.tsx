@@ -71,25 +71,30 @@ export default function ContactPage() {
             </a>
           )}
           {socials.length > 0 && (
-            <div className="mt-6 flex gap-2">
-              {socials.map(([k, Icon]) => (
-                <a key={k} href={site.socials[k]} target="_blank" rel="noreferrer" aria-label={k} className="grid h-11 w-11 place-items-center rounded-xl bg-white text-royal ring-1 ring-line hover:bg-royal hover:text-white">
-                  <Icon className="h-5 w-5" />
-                </a>
-              ))}
+            <div className="mt-6">
+              <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-slate-500">Follow {site.siteName}</p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {socials.map(([k, Icon]) => (
+                  <a key={k} href={site.socials[k]} target="_blank" rel="noreferrer" aria-label={`${site.siteName} on ${k}`} className="inline-flex items-center gap-2 rounded-xl bg-white px-3.5 py-2 text-[14px] font-medium capitalize text-royal ring-1 ring-line hover:bg-royal hover:text-white">
+                    <Icon className="h-5 w-5" /> {k === "youtube" ? "YouTube" : k}
+                  </a>
+                ))}
+              </div>
             </div>
           )}
           {moreSocials.length > 0 && (
-            <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px]">
-              <span className="text-slate-500">Also find us:</span>
-              {moreSocials.map((m) => {
-                const Icon = SOCIAL_ICONS[m.network];
-                return (
-                  <a key={m.url} href={m.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-medium text-navy hover:text-royal">
-                    <Icon className="h-3.5 w-3.5 text-brand" /> {m.label}
-                  </a>
-                );
-              })}
+            <div className="mt-4">
+              <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-slate-500">Follow RKS Creations</p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {moreSocials.map((m) => {
+                  const Icon = SOCIAL_ICONS[m.network];
+                  return (
+                    <a key={m.url} href={m.url} target="_blank" rel="noreferrer" aria-label={`RKS Creations on ${m.network}`} className="inline-flex items-center gap-2 rounded-xl bg-white px-3.5 py-2 text-[14px] font-medium capitalize text-royal ring-1 ring-line hover:bg-royal hover:text-white">
+                      <Icon className="h-5 w-5" /> {m.network === "youtube" ? "YouTube" : m.network}
+                    </a>
+                  );
+                })}
+              </div>
             </div>
           )}
         </div>

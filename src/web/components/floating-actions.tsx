@@ -19,6 +19,17 @@ export function FloatingActions() {
     return () => clearTimeout(t);
   }, []);
 
+  // On phones the round WhatsApp / chat buttons appear after the visitor scrolls past the banner,
+  // so they don't cover the banner buttons (the Call / WhatsApp bar is always there).
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const on = () => setScrolled(window.scrollY > 420);
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
+  const phoneHide = scrolled || chat ? "" : "max-md:pointer-events-none max-md:opacity-0";
+
   return (
     <>
       {/* WhatsApp — bottom left (can be turned off in Admin → WhatsApp) */}
@@ -28,7 +39,7 @@ export function FloatingActions() {
         target="_blank"
         rel="noreferrer"
         aria-label="Chat on WhatsApp"
-        className="fixed bottom-20 left-4 z-40 grid h-14 w-14 place-items-center rounded-full bg-wa text-white shadow-[0_10px_30px_-8px_rgba(37,211,102,0.7)] transition hover:scale-105 md:bottom-6 md:left-6"
+        className={`fixed bottom-20 left-4 z-40 grid h-14 w-14 place-items-center rounded-full bg-wa text-white shadow-[0_10px_30px_-8px_rgba(37,211,102,0.7)] transition hover:scale-105 md:bottom-6 md:left-6 ${phoneHide}`}
       >
         <WaIcon className="h-7 w-7" />
         <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-wa/40" />
@@ -52,7 +63,7 @@ export function FloatingActions() {
           setHint(false);
         }}
         aria-label={chat ? "Close chat" : "Open chat assistant"}
-        className="fixed bottom-20 right-4 z-40 grid h-14 w-14 place-items-center rounded-full bg-brand text-white shadow-[0_10px_30px_-8px_rgba(181,128,26,0.7)] transition hover:scale-105 md:bottom-6 md:right-6"
+        className={`fixed bottom-20 right-4 z-40 grid h-14 w-14 place-items-center rounded-full bg-brand text-white shadow-[0_10px_30px_-8px_rgba(181,128,26,0.7)] transition hover:scale-105 md:bottom-6 md:right-6 ${phoneHide}`}
       >
         {chat ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
       </button>

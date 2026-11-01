@@ -60,7 +60,7 @@ function HeroSlider() {
       onMouseLeave={() => setPaused(false)}
       aria-roledescription="carousel"
     >
-      <div className="relative h-[740px] sm:h-[660px] lg:h-[630px]">
+      <div className="relative h-[800px] sm:h-[680px] lg:h-[630px]">
         {SLIDES.map((s, idx) => (
           <div
             key={s.title}
@@ -106,7 +106,7 @@ function HeroSlider() {
                   )}
                 </div>
                 {/* slide switcher: one pill per banner, under the buttons and lined up with the text (scrolls sideways on small phones) */}
-                <div className="no-scrollbar -mx-4 mt-7 flex gap-2 overflow-x-auto px-4 max-lg:self-stretch lg:mx-0 lg:max-w-full lg:px-0" role="tablist" aria-label="Banners">
+                <div className="mt-6 flex flex-wrap justify-center gap-2 lg:mt-7 lg:flex-nowrap lg:justify-start" role="tablist" aria-label="Banners">
                   {SLIDES.map((sl, k) => (
                     <button
                       key={sl.title}
@@ -114,7 +114,7 @@ function HeroSlider() {
                       aria-selected={k === i}
                       onClick={() => setI(k)}
                       aria-label={`Go to slide ${k + 1}: ${sl.label}`}
-                      className={`shrink-0 whitespace-nowrap rounded-full px-3.5 py-1.5 text-[12px] font-semibold transition sm:text-[13px] ${
+                      className={`shrink-0 whitespace-nowrap rounded-full px-3 py-1.5 text-[12px] font-semibold transition sm:px-3.5 sm:text-[13px] ${
                         k === i ? "bg-white text-navy shadow-[0_6px_18px_-6px_rgba(0,0,0,0.6)]" : "bg-black/35 text-white ring-1 ring-white/20 backdrop-blur hover:bg-black/55"
                       }`}
                     >
@@ -217,7 +217,7 @@ function CategoryBanners() {
               to={`/services/${c.slug}`}
               className={`${i === 6 ? "sm:col-span-2 lg:col-span-3 lg:min-h-[300px]" : ""} group relative isolate flex min-h-[250px] flex-col justify-end overflow-hidden rounded-2xl p-6 shadow-sm ring-1 ring-black/5 transition hover:-translate-y-1 hover:shadow-xl`}
             >
-              <img src={c.image} alt="" loading="lazy" className={`absolute inset-0 -z-10 h-full w-full object-cover transition duration-700 group-hover:scale-105 ${i === 6 ? "object-[50%_22%]" : ""}`} />
+              <img src={c.image} alt="" loading="lazy" className={`absolute inset-0 -z-10 h-full w-full object-cover transition duration-700 group-hover:scale-105 ${i === 6 ? "object-right" : ""}`} />
               <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy via-navy/80 to-navy/10" />
               <span className="mb-auto w-fit rounded-full bg-white/15 px-3 py-1 text-[12px] font-medium text-white ring-1 ring-white/25 backdrop-blur">
                 {c.slug === "microsoft-certifications" ? `${c.services.filter((x) => /^[A-Z]{2}-\d{3}:/.test(x.name)).length} Courses & Exams` : `${c.services.length} services`}
@@ -247,16 +247,16 @@ function WhoWeHelp() {
           <div className="max-w-2xl">
             <p className="mb-2 text-[13px] font-semibold uppercase tracking-[0.14em] text-brand">Who We Help</p>
             <h2 className="text-3xl font-bold sm:text-[38px] sm:leading-tight">
-              Built for <span className="mark-brand">People Like You</span>
+              Built for <br className="sm:hidden" /><span className="mark-brand whitespace-nowrap">People Like You</span>
             </h2>
             <p className="mt-3 text-[16px]">Pick what describes you best — here's where most people like you start.</p>
           </div>
-          <p className="font-hand text-[26px] leading-tight text-navy sm:text-[30px] lg:max-w-[260px] lg:text-right">
+          <p className="font-hand text-[24px] leading-tight text-navy sm:text-[30px] lg:max-w-[260px] lg:text-right">
             Not listed? We still help — <Link to="/contact" className="text-brand underline decoration-2 underline-offset-4">just ask!</Link> 🙂
           </p>
         </div>
 
-        <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
           {AUDIENCES.map((a, idx) => {
             const Icon = AUDIENCE_ICONS[idx] ?? Users;
             // skip chips whose service was renamed / hidden in Admin → Services
@@ -264,9 +264,9 @@ function WhoWeHelp() {
             return (
               <article
                 key={a.label}
-                className="group flex w-[84%] shrink-0 snap-center flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-line transition hover:-translate-y-1 hover:shadow-[0_24px_50px_-28px_rgba(13,35,79,0.5)] sm:w-auto"
+                className="group flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-line transition hover:-translate-y-1 hover:shadow-[0_24px_50px_-28px_rgba(13,35,79,0.5)] sm:w-auto"
               >
-                <div className="relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-[16/10] overflow-hidden sm:aspect-[4/3]">
                   <img src={a.image} alt="" loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
                   <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy/70 to-transparent" />
                   <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-brand px-3.5 py-1.5 text-[14px] font-semibold text-white shadow-md">
