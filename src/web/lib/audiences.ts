@@ -10,7 +10,7 @@ export type Audience = {
   label: string;
   short: string;
   image: string;
-  /** [category slug, service name] pairs — the "start here" chips */
+  /** [category slug, service name] pairs — the "start here" chips. An empty service name links to the whole category. */
   starts: [string, string][];
 };
 
@@ -18,7 +18,7 @@ export const AUDIENCES: Audience[] = [
   {
     label: "Shops & Local Businesses",
     short: "Get found on Google and WhatsApp, and look professional in your area.",
-    image: asset("/images/slide-online.jpg"),
+    image: asset("/images/who-shops.webp"),
     starts: [
       ["social-media", "Google Business Profile"],
       ["design", "Flyer / Posters"],
@@ -61,10 +61,10 @@ export const AUDIENCES: Audience[] = [
   },
   {
     label: "Students & Learners",
-    short: "Job-ready Microsoft and digital skills, taught simply.",
+    short: "Job-ready Microsoft certificates with guided training.",
     image: asset("/images/cat-microsoft-v2.jpg"),
     starts: [
-      ["microsoft-certifications", "Microsoft Office Training (Word, Excel, PowerPoint)"],
+      ["microsoft-certifications", ""],
       ["microsoft-certifications", "Digital Skills & AI Tools Training"],
       ["microsoft-certifications", "AZ-900: Azure Fundamentals"],
       ["microsoft-certifications", "AI-901: Azure AI Fundamentals"],

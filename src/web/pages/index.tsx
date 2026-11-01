@@ -60,7 +60,7 @@ function HeroSlider() {
       onMouseLeave={() => setPaused(false)}
       aria-roledescription="carousel"
     >
-      <div className="relative h-[640px] sm:h-[560px] lg:h-[540px]">
+      <div className="relative h-[740px] sm:h-[660px] lg:h-[630px]">
         {SLIDES.map((s, idx) => (
           <div
             key={s.title}
@@ -105,6 +105,23 @@ function HeroSlider() {
                     </Link>
                   )}
                 </div>
+                {/* slide switcher: one pill per banner, under the buttons and lined up with the text (scrolls sideways on small phones) */}
+                <div className="no-scrollbar -mx-4 mt-7 flex gap-2 overflow-x-auto px-4 max-lg:self-stretch lg:mx-0 lg:max-w-full lg:px-0" role="tablist" aria-label="Banners">
+                  {SLIDES.map((sl, k) => (
+                    <button
+                      key={sl.title}
+                      role="tab"
+                      aria-selected={k === i}
+                      onClick={() => setI(k)}
+                      aria-label={`Go to slide ${k + 1}: ${sl.label}`}
+                      className={`shrink-0 whitespace-nowrap rounded-full px-3.5 py-1.5 text-[12px] font-semibold transition sm:text-[13px] ${
+                        k === i ? "bg-white text-navy shadow-[0_6px_18px_-6px_rgba(0,0,0,0.6)]" : "bg-black/35 text-white ring-1 ring-white/20 backdrop-blur hover:bg-black/55"
+                      }`}
+                    >
+                      {sl.label}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
           </div>
@@ -124,23 +141,6 @@ function HeroSlider() {
         >
           <ChevronRight className="h-5 w-5" />
         </button>
-        {/* slide switcher: one pill per banner (scrolls sideways on small phones) */}
-        <div className="no-scrollbar absolute inset-x-0 bottom-24 flex gap-2 overflow-x-auto px-4 sm:bottom-20 sm:justify-center" role="tablist" aria-label="Banners">
-          {SLIDES.map((s, idx) => (
-            <button
-              key={s.title}
-              role="tab"
-              aria-selected={idx === i}
-              onClick={() => setI(idx)}
-              aria-label={`Go to slide ${idx + 1}: ${s.label}`}
-              className={`shrink-0 whitespace-nowrap rounded-full px-3.5 py-1.5 text-[12px] font-semibold transition sm:text-[13px] ${
-                idx === i ? "bg-white text-navy shadow-[0_6px_18px_-6px_rgba(0,0,0,0.6)]" : "bg-black/35 text-white ring-1 ring-white/20 backdrop-blur hover:bg-black/55"
-              }`}
-            >
-              {s.label}
-            </button>
-          ))}
-        </div>
       </div>
     </section>
   );
@@ -220,7 +220,7 @@ function CategoryBanners() {
               <img src={c.image} alt="" loading="lazy" className={`absolute inset-0 -z-10 h-full w-full object-cover transition duration-700 group-hover:scale-105 ${i === 6 ? "object-[50%_22%]" : ""}`} />
               <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy via-navy/80 to-navy/10" />
               <span className="mb-auto w-fit rounded-full bg-white/15 px-3 py-1 text-[12px] font-medium text-white ring-1 ring-white/25 backdrop-blur">
-                {c.services.length} {c.slug === "microsoft-certifications" ? "courses & exams" : "services"}
+                {c.slug === "microsoft-certifications" ? `${c.services.filter((x) => /^[A-Z]{2}-\d{3}:/.test(x.name)).length} Courses & Exams` : `${c.services.length} services`}
               </span>
               <h3 className="mt-6 max-w-[60%] text-[24px] font-bold leading-tight !text-white">{c.title}</h3>
               <p className="mt-2 max-w-[62%] text-[14px] leading-snug text-white/85">{c.short}</p>
@@ -235,7 +235,7 @@ function CategoryBanners() {
   );
 }
 
-const POP_ICONS = [PenTool, Clapperboard, Globe2, Instagram, ImageIcon, FileText, GraduationCap, MessageCircle];
+const POP_ICONS = [GraduationCap, Clapperboard, Globe2, Instagram, FileText, ShieldCheck, BadgeCheck, MessageCircle];
 
 const AUDIENCE_ICONS = [Store, Rocket, Briefcase, Video, GraduationCap, PartyPopper];
 
@@ -247,7 +247,7 @@ function WhoWeHelp() {
           <div className="max-w-2xl">
             <p className="mb-2 text-[13px] font-semibold uppercase tracking-[0.14em] text-brand">Who We Help</p>
             <h2 className="text-3xl font-bold sm:text-[38px] sm:leading-tight">
-              Built for <span className="mark-brand">people like you</span>
+              Built for <span className="mark-brand">People Like You</span>
             </h2>
             <p className="mt-3 text-[16px]">Pick what describes you best — here's where most people like you start.</p>
           </div>
@@ -260,7 +260,7 @@ function WhoWeHelp() {
           {AUDIENCES.map((a, idx) => {
             const Icon = AUDIENCE_ICONS[idx] ?? Users;
             // skip chips whose service was renamed / hidden in Admin → Services
-            const starts = a.starts.filter(([cat, name]) => findService(cat, slugify(name)).service);
+            const starts = a.starts.filter(([cat, name]) => (name ? findService(cat, slugify(name)).service : CATEGORIES.some((c) => c.slug === cat)));
             return (
               <article
                 key={a.label}
@@ -279,15 +279,15 @@ function WhoWeHelp() {
                   <div className="mt-3 flex flex-wrap gap-2">
                     {starts.map(([cat, name]) => (
                       <Link
-                        key={name}
-                        to={serviceUrl(cat, name)}
+                        key={name || cat}
+                        to={name ? serviceUrl(cat, name) : `/services/${cat}`}
                         className="rounded-full bg-surface px-3 py-1.5 text-[13px] font-medium text-navy ring-1 ring-line transition hover:bg-royal hover:text-white hover:ring-royal"
                       >
-                        {name.replace(/ \(.*\)$/, "")}
+                        {name ? name.replace(/ \(.*\)$/, "") : CATEGORIES.find((c) => c.slug === cat)?.title}
                       </Link>
                     ))}
                   </div>
-                  <Link to={`/contact?service=${encodeURIComponent(starts[0]?.[1] ?? "")}`} className="mt-auto inline-flex items-center gap-1.5 pt-5 text-[14px] font-semibold text-brand group-hover:gap-2.5">
+                  <Link to={`/contact?service=${encodeURIComponent(starts.find((x) => x[1])?.[1] ?? "")}`} className="mt-auto inline-flex items-center gap-1.5 pt-5 text-[14px] font-semibold text-brand group-hover:gap-2.5">
                     Talk to us about this <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
@@ -311,7 +311,7 @@ function Popular() {
             return (
               <Link
                 key={p.name}
-                to={serviceUrl(p.cat, p.name)}
+                to={"category" in p && p.category ? `/services/${p.cat}` : serviceUrl(p.cat, p.name)}
                 className="group flex flex-col rounded-2xl border border-line bg-white p-5 transition hover:-translate-y-1 hover:border-royal/30 hover:shadow-[0_20px_40px_-24px_rgba(30,79,216,0.45)]"
               >
                 <span className="grid h-12 w-12 place-items-center rounded-xl bg-royal/10 text-royal transition group-hover:bg-royal group-hover:text-white">
@@ -340,7 +340,7 @@ const STEPS = [
 function AboutFounder() {
   const site = useSite();
   return (
-    <section id="about" className="bg-surface py-16 sm:py-20">
+    <section id="about" className="overflow-x-clip bg-surface py-16 sm:py-20">
       <div className="container-x">
         <div className="grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:items-center">
           <div>

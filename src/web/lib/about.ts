@@ -24,7 +24,7 @@ export const FOUNDER = {
   role: "Founder",
   photo: "/images/founder.jpg",
   summary:
-    "Web coder, certified trainer and AI content creator with a background in teaching, motivational training and public speaking. She leads business strategy, client communication and creative direction at RKS Digital Services.",
+    "A Microsoft Certified Professional, AI Content Creator, and an Impact International Certified Trainer with a background in teaching and public speaking. She leads business strategy, client communication, and creative direction at RKS Digital Services.",
   vision:
     "To provide accessible, creative and professional digital solutions that help individuals and businesses grow their digital presence.",
   tags: ["AI Tools & Content", "Graphic Design", "Web Development", "Digital Marketing", "Microsoft Training"],

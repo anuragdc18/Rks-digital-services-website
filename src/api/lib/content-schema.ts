@@ -334,7 +334,7 @@ export const DEFAULT_CONTENT: Content = {
     {
       id: "starter",
       name: "Starter",
-      price: "₹4,999",
+      price: "",
       oldPrice: "",
       period: "one-time",
       periodLabel: "",
@@ -350,7 +350,7 @@ export const DEFAULT_CONTENT: Content = {
     {
       id: "growth",
       name: "Growth",
-      price: "₹14,999",
+      price: "",
       oldPrice: "",
       period: "one-time",
       periodLabel: "",
@@ -366,7 +366,7 @@ export const DEFAULT_CONTENT: Content = {
     {
       id: "premium",
       name: "Premium",
-      price: "₹9,999",
+      price: "",
       oldPrice: "",
       period: "monthly",
       periodLabel: "",
@@ -380,7 +380,7 @@ export const DEFAULT_CONTENT: Content = {
       visible: true,
     },
   ],
-  packagesSection: { show: true, title: "Packages & Pricing", subtitle: "Simple packages with clear pricing. Need something custom? Just ask.", note: "Prices are indicative. Government fees, if any, are extra." },
+  packagesSection: { show: true, title: "Our Service Packages", subtitle: "Smart solutions designed for your business goals.", note: "" },
   // Sample reviews — replace with real customer reviews in Admin → Reviews before going live.
   reviews: [
     { id: "r1", name: "Ravi K.", place: "Rajahmundry", rating: 5, text: "They designed our logo, visiting cards and a promo video for our shop opening. Everything was ready on time and looked very professional.", date: "", source: "", visible: true },

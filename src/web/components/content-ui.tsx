@@ -80,7 +80,7 @@ export function PackageCards({ packages, compact = false }: { packages: Package[
   return (
     <div className={`grid gap-6 ${cols} ${compact ? "" : "items-stretch"}`}>
       {packages.map((p) => {
-        const text = `Hi ${site.siteName}, I'm interested in the ${p.name} package${p.price ? ` (${p.price})` : ""}.`;
+        const text = `Hi ${site.siteName}, I'm interested in the ${p.name} package.`;
         return (
           <div
             key={p.id}
@@ -91,11 +91,7 @@ export function PackageCards({ packages, compact = false }: { packages: Package[
             {p.popular && <span className="absolute -top-3 left-7 rounded-full bg-brand px-3 py-1 text-[11.5px] font-bold uppercase tracking-wider text-white">Most Popular</span>}
             <h3 className="text-[20px] font-bold text-navy">{p.name}</h3>
             {p.description && <p className="mt-1.5 text-[14.5px]">{p.description}</p>}
-            <div className="mt-5 flex flex-wrap items-end gap-2">
-              {p.price && <span className="text-[34px] font-extrabold leading-none text-navy">{p.price}</span>}
-              {p.oldPrice && p.period !== "custom" && <span className="pb-1 text-[15px] text-slate-400 line-through">{p.oldPrice}</span>}
-              {p.price && <span className="pb-1 text-[14px] text-slate-500">{periodText(p)}</span>}
-            </div>
+            {/* Prices are not shown on this website (client request). */}
             <ul className="mt-6 space-y-2.5">
               {p.features.map((f) => (
                 <li key={f} className="flex gap-2.5 text-[14.5px]">

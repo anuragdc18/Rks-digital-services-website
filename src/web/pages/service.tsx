@@ -187,7 +187,7 @@ export default function ServicePage() {
 
             {pkgs.length > 0 && (
               <div>
-                <h2 className="mb-4 text-[22px] font-bold">Packages & Pricing</h2>
+                <h2 className="mb-4 text-[22px] font-bold">Our Service Packages</h2>
                 <PackageCards packages={pkgs} compact />
               </div>
             )}

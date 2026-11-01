@@ -347,7 +347,7 @@ export function allPages(origin: string, ctx: SeoCtx): PageSeo[] {
   if (content.packagesSection.show && content.packages.length) {
     pages.push({
       path: "/packages",
-      title: fit(`${content.packagesSection.title || "Packages & Pricing"} | ${brand}`),
+      title: fit(`${content.packagesSection.title || "Our Service Packages"} | ${brand}`),
       description: clip(content.packagesSection.subtitle || `Packages and pricing from ${brand}.`),
       priority: 0.8,
       jsonLd: [
