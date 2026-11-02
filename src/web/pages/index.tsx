@@ -42,6 +42,7 @@ import { WaIcon } from "../components/header";
 import { useContent } from "../queries/content";
 import { PostCard } from "../components/content-ui";
 import { CertBadges } from "../components/cert-badges";
+import { VideoShowcase } from "../components/video-showcase";
 
 function HeroSlider() {
   const [i, setI] = useState(0);
@@ -590,6 +591,7 @@ export default function Index() {
       <CategoryBanners />
       <WhoWeHelp />
       <Popular />
+      <VideoShowcase />
       <AboutFounder />
       <Process />
       <WhyAndReviews />
