@@ -40,7 +40,7 @@ const TYPES: Record<string, string> = {
   ".xml": "application/xml",
 };
 
-function staticFile(pathname: string): Response | null {
+function staticFile(pathname: string, range?: string | null): Response | null {
   let rel: string;
   try {
     rel = decodeURIComponent(pathname);
@@ -52,8 +52,24 @@ function staticFile(pathname: string): Response | null {
   if (!fs.existsSync(file) || !fs.statSync(file).isFile()) return null;
   const ext = path.extname(file).toLowerCase();
   const cache = rel.startsWith("/assets/") ? "public, max-age=31536000, immutable" : "public, max-age=3600";
+  const type = TYPES[ext] ?? "application/octet-stream";
+  if (ext === ".mp4") {
+    // videos: answer byte-range requests so phones (Safari) can play and seek
+    const size = fs.statSync(file).size;
+    const m = range && /bytes=(\d*)-(\d*)/.exec(range);
+    if (m && (m[1] || m[2])) {
+      const start = m[1] ? Number(m[1]) : Math.max(0, size - Number(m[2]));
+      const end = m[1] && m[2] ? Math.min(Number(m[2]), size - 1) : size - 1;
+      if (start >= size || start > end) return new Response(null, { status: 416, headers: { "content-range": `bytes */${size}` } });
+      const buf = Buffer.alloc(end - start + 1);
+      const fd = fs.openSync(file, "r");
+      try { fs.readSync(fd, buf, 0, buf.length, start); } finally { fs.closeSync(fd); }
+      return new Response(buf, { status: 206, headers: { "content-type": type, "content-range": `bytes ${start}-${end}/${size}`, "accept-ranges": "bytes", "content-length": String(buf.length), "cache-control": cache } });
+    }
+    return new Response(fs.readFileSync(file), { headers: { "content-type": type, "accept-ranges": "bytes", "content-length": String(size), "cache-control": cache } });
+  }
   return new Response(fs.readFileSync(file), {
-    headers: { "content-type": TYPES[ext] ?? "application/octet-stream", "cache-control": cache },
+    headers: { "content-type": type, "cache-control": cache },
   });
 }
 
@@ -61,7 +77,7 @@ async function handle(request: Request): Promise<Response> {
   const url = new URL(request.url);
   if (url.pathname.startsWith("/api")) return api.fetch(request);
   if (request.method !== "GET" && request.method !== "HEAD") return new Response("Method not allowed", { status: 405 });
-  const file = url.pathname !== "/" && url.pathname !== "/index.html" ? staticFile(url.pathname) : null;
+  const file = url.pathname !== "/" && url.pathname !== "/index.html" ? staticFile(url.pathname, request.headers.get("range")) : null;
   if (file) return file;
   if (!fs.existsSync(indexHtml)) return new Response("Website not built yet. Run `npm run build` first.", { status: 500 });
   try {

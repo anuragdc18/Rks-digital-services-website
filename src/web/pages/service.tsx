@@ -21,6 +21,8 @@ import { CtaBand } from "./index";
 import { serviceFaqs } from "../lib/service-faqs";
 import { PackageCards, usePackagesFor } from "../components/content-ui";
 import { useContent } from "../queries/content";
+import { WORK_VIDEOS } from "../lib/work-videos";
+import { asset } from "../lib/demo";
 
 const STEPS = [
   { title: "Free Call", text: "Tell us what you need. We explain everything simply." },
@@ -73,6 +75,33 @@ function Ticks({ items, cols = false }: { items: string[]; cols?: boolean }) {
         </li>
       ))}
     </ul>
+  );
+}
+
+function WorkVideos({ name }: { name: string }) {
+  const vids = WORK_VIDEOS[name];
+  if (!vids?.length) return null;
+  return (
+    <section className="rounded-2xl border border-line bg-white p-6 sm:p-7">
+      <h2 className="text-[22px] font-bold">Our Recent Work</h2>
+      <p className="mt-1 text-[14.5px]">A few videos we have made for our clients. Tap to play.</p>
+      <div className="mt-5 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
+        {vids.map((v) => (
+          <figure key={v.file} className="overflow-hidden rounded-xl bg-navy ring-1 ring-line">
+            <video
+              className="block aspect-[9/16] w-full bg-black object-cover"
+              src={asset(`/videos/work/${v.file}.mp4`)}
+              poster={asset(`/videos/work/${v.file}.jpg`)}
+              controls
+              playsInline
+              preload="none"
+              controlsList="nodownload"
+            />
+            <figcaption className="px-3 py-2 text-[13.5px] font-semibold !text-white">{v.title}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -150,6 +179,8 @@ export default function ServicePage() {
       <section className="bg-surface py-12 sm:py-16">
         <div className="container-x grid gap-8 lg:grid-cols-[1fr_380px] lg:items-start">
           <div className="space-y-6">
+            <WorkVideos name={service.name} />
+
             <Block icon={Users} title="Who Is This For?">
               <Ticks items={who} />
             </Block>
