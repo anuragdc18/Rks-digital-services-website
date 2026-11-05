@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import {
   ArrowRight,
+  Award,
   BadgeCheck,
   ChevronDown,
   ChevronLeft,
@@ -16,7 +17,6 @@ import {
   PenTool,
   ShieldCheck,
   Smartphone,
-  Star,
   Upload,
   Users,
   Sparkles,
@@ -147,24 +147,12 @@ function HeroSlider() {
   );
 }
 
-// Sample figures from the template — update in src/web/pages/index.tsx when the client shares real numbers.
 const TRUST = [
-  { icon: Star, big: "4.8", small: "Google Rating" },
-  { icon: Users, big: "1,000+", small: "Happy Clients" },
+  { icon: Sparkles, big: "AI-Powered", small: "Creative Digital Solutions" },
+  { icon: Award, big: "Certified Expertise", small: "Professional Services" },
   { icon: MapPin, big: "Rajahmundry", small: "& Pan-India Online" },
-  { icon: ShieldCheck, big: "100%", small: "Online Process" },
+  { icon: ShieldCheck, big: "100% Online", small: "Easy & Convenient Process" },
 ];
-
-function GoogleG() {
-  return (
-    <svg viewBox="0 0 48 48" className="h-6 w-6" aria-hidden>
-      <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z" />
-      <path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z" />
-      <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z" />
-      <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z" />
-    </svg>
-  );
-}
 
 function EnquiryBar() {
   return (
@@ -178,19 +166,19 @@ function EnquiryBar() {
         </div>
       </div>
       <div className="pb-10 pt-8">
-      <div className="container-x grid grid-cols-2 gap-y-6 md:grid-cols-4">
-        {TRUST.map((t, idx) => (
-          <div key={t.small} className={`flex items-center justify-center gap-3 ${idx > 0 ? "md:border-l md:border-line" : ""}`}>
-            <span className="grid h-11 w-11 place-items-center rounded-xl bg-white text-royal shadow-sm">
-              {idx === 0 ? <GoogleG /> : <t.icon className="h-5 w-5" />}
-            </span>
-            <div>
-              <p className="text-lg font-bold leading-tight text-navy">{t.big}</p>
-              <p className="text-[13px]">{t.small}</p>
-            </div>
+        <div className="container-x">
+          <div className="mx-auto grid max-w-3xl grid-cols-1 gap-x-10 gap-y-6 rounded-2xl border border-line bg-white px-6 py-6 shadow-sm sm:grid-cols-2 sm:px-10">
+            {TRUST.map((t) => (
+              <div key={t.big} className="flex items-start gap-3">
+                <t.icon className="mt-0.5 h-5 w-5 shrink-0 text-royal" />
+                <div>
+                  <p className="text-[17px] font-bold leading-tight text-navy">{t.big}</p>
+                  <p className="text-[13px]">{t.small}</p>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
       </div>
     </section>
   );
@@ -442,57 +430,24 @@ const WHY = [
 
 function WhyAndReviews() {
   const site = useSite();
-  const content = useContent();
-  const REVIEWS = content.reviewsSection.show ? content.reviews.slice(0, 3) : [];
-  const rs = content.reviewsSection;
   return (
     <section className="py-16 sm:py-20">
-      <div className="container-x grid gap-12 lg:grid-cols-[1fr_1.35fr] lg:items-start">
-        <div>
-          <p className="mb-2 text-[13px] font-semibold uppercase tracking-[0.14em] text-brand">Why {site.siteName}</p>
-          <h2 className="text-3xl font-bold sm:text-[38px] sm:leading-tight">Why Businesses Trust Us</h2>
-          <div className="mt-8 space-y-5">
-            {WHY.map((w) => (
-              <div key={w.title} className="flex gap-4">
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-                  <w.icon className="h-5 w-5" />
-                </span>
-                <div>
-                  <h3 className="font-semibold">{w.title}</h3>
-                  <p className="text-[15px]">{w.text}</p>
-                </div>
+      <div className="container-x">
+        <p className="mb-2 text-[13px] font-semibold uppercase tracking-[0.14em] text-brand">Why {site.siteName}</p>
+        <h2 className="text-3xl font-bold sm:text-[38px] sm:leading-tight">Why Businesses Trust Us</h2>
+        <div className="mt-8 grid gap-x-10 gap-y-6 md:grid-cols-2 lg:grid-cols-3">
+          {WHY.map((w) => (
+            <div key={w.title} className="flex gap-4">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+                <w.icon className="h-5 w-5" />
+              </span>
+              <div>
+                <h3 className="font-semibold">{w.title}</h3>
+                <p className="text-[15px]">{w.text}</p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-        {REVIEWS.length > 0 && <div>
-          <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-            <h3 className="text-xl font-semibold">What Our Clients Say</h3>
-            {rs.rating && (
-              <a href={rs.googleUrl || undefined} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-[14px]">
-                <span className="flex text-brand">{[0, 1, 2, 3, 4].map((k) => <Star key={k} className="h-4 w-4 fill-current" />)}</span>
-                {rs.rating} on Google{rs.ratingCount ? ` (${rs.ratingCount})` : ""}
-              </a>
-            )}
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {REVIEWS.map((r, idx) => (
-              <figure key={r.id} className={`rounded-2xl border border-line bg-white p-6 ${idx === 2 ? "sm:col-span-2" : ""}`}>
-                <div className="flex text-brand">{Array.from({ length: r.rating }, (_, k) => <Star key={k} className="h-4 w-4 fill-current" />)}</div>
-                <blockquote className="mt-3 text-[15px] leading-relaxed text-navy">"{r.text}"</blockquote>
-                <figcaption className="mt-4 flex items-center gap-3">
-                  <span className="grid h-10 w-10 place-items-center rounded-full bg-royal text-[14px] font-bold text-white">
-                    {r.name[0]}
-                  </span>
-                  <span>
-                    <span className="block font-semibold text-navy">{r.name}</span>
-                    <span className="text-[13px]">{r.place}</span>
-                  </span>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>}
       </div>
     </section>
   );
