@@ -167,9 +167,9 @@ function EnquiryBar() {
       </div>
       <div className="pb-10 pt-8">
         <div className="container-x">
-          <div className="mx-auto grid max-w-3xl grid-cols-1 gap-x-10 gap-y-6 rounded-2xl border border-line bg-white px-6 py-6 shadow-sm sm:grid-cols-2 sm:px-10">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-6 rounded-2xl border border-line bg-white px-5 py-6 shadow-sm sm:px-8 lg:grid-cols-4">
             {TRUST.map((t) => (
-              <div key={t.big} className="flex items-start gap-3">
+              <div key={t.big} className="flex items-start gap-3 lg:justify-center">
                 <t.icon className="mt-0.5 h-5 w-5 shrink-0 text-royal" />
                 <div>
                   <p className="text-[17px] font-bold leading-tight text-navy">{t.big}</p>
